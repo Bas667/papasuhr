@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #clocks {
+            display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 1px;
+    justify-items: center;
+    align-items: center;
+    width: 35%;
+    margin: auto;
+        }
+        .clock {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 3px solid black;
+            border-radius: 50%;
+            margin: 4px;
+        }
+        .hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            width: 5px;
+            background: black;
+            transform-origin: bottom;
+            transition: transform 1s linear;
+        }
+        .hour-hand {
+            height: 50%;
+            transform: translateX(-50%) rotate(0deg);
+        }
+        .minute-hand {
+            height: 35%;
+            transform: translateX(-50%) rotate(180deg);
+        }
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: red;
+            border-radius: 50%;
+        }
+        .center {
+    text-align: center;
+}
+        #coordinates, #activeHands {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            white-space: pre; /* Add this line */
+        }
+        #activeHands {
+            bottom: 100px;
+        }
+        #syncButton, #resetButton {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Dem Papa seine Uhr</h1>
+    <h2 align="center">ANIMATION</h2>
+    <div id="clocks"></div>
+
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <input type="text" id="animationInput" placeholder="Animationsdaten hier rein" style="width: 700px; height: 40px; font-size: 20px;">
+        <button id="animateButton" style="width: 200px; height: 50px; font-size: 20px;">STARTE ANIMATION</button>
+    </div>
+
+    <script>
+var _0xcd4d77=_0x3baa;function _0x3bb0(){var _0x1e4632=['dataset','value','9vsYqwf','animateButton','clocks','indexOf','835SpXgPJ','255','1691240eSKOpC','transform','getElementById','split','className','4ZJcmxG','661649XTAJVD','querySelector','appendChild','style','translateX(-50%)\x20rotate(','activeHands','click','.hand[data-number=\x22','12366776iSHThK','div','addEventListener','16490353xghwvx','41290356egzNZA','230','createElement','5995928mMELMS','filter','floor','animationInput','3PvECCN','hand\x20minute-hand','hand\x20hour-hand','4158tixJYg','clock','forEach','number','7uKOuPi'];_0x3bb0=function(){return _0x1e4632;};return _0x3bb0();}(function(_0x2e1238,_0x30c57e){var _0x47884d=_0x3baa,_0x15bd65=_0x2e1238();while(!![]){try{var _0x3eb5ad=-parseInt(_0x47884d(0x1a7))/0x1*(parseInt(_0x47884d(0x1a6))/0x2)+-parseInt(_0x47884d(0x191))/0x3*(-parseInt(_0x47884d(0x1b6))/0x4)+parseInt(_0x47884d(0x19f))/0x5*(parseInt(_0x47884d(0x194))/0x6)+parseInt(_0x47884d(0x198))/0x7*(-parseInt(_0x47884d(0x1af))/0x8)+-parseInt(_0x47884d(0x19b))/0x9*(-parseInt(_0x47884d(0x1a1))/0xa)+-parseInt(_0x47884d(0x1b2))/0xb+parseInt(_0x47884d(0x1b3))/0xc;if(_0x3eb5ad===_0x30c57e)break;else _0x15bd65['push'](_0x15bd65['shift']());}catch(_0x3f8976){_0x15bd65['push'](_0x15bd65['shift']());}}}(_0x3bb0,0xd1170));var clocksContainer=document[_0xcd4d77(0x1a3)](_0xcd4d77(0x19d)),coordinates=document[_0xcd4d77(0x1a3)]('coordinates'),activeHandsBox=document['getElementById'](_0xcd4d77(0x1ac)),activeAngle=0x0,activeHands=[],baseNumbers=[0xb,0xd,0x29,0x2b,0x47,0x49,0x65,0x67];function _0x3baa(_0x4b62b2,_0x487c11){var _0x3bb0cf=_0x3bb0();return _0x3baa=function(_0x3baa46,_0x794141){_0x3baa46=_0x3baa46-0x190;var _0x22548a=_0x3bb0cf[_0x3baa46];return _0x22548a;},_0x3baa(_0x4b62b2,_0x487c11);}for(var i=0x0;i<0x18;i++){var clock=document[_0xcd4d77(0x1b5)]('div');clock[_0xcd4d77(0x1a5)]=_0xcd4d77(0x195);var hourHand=document[_0xcd4d77(0x1b5)](_0xcd4d77(0x1b0));hourHand[_0xcd4d77(0x1a5)]=_0xcd4d77(0x193),hourHand[_0xcd4d77(0x199)]['number']=baseNumbers[i%0x8]+Math[_0xcd4d77(0x1b8)](i/0x8)*0xa,clock[_0xcd4d77(0x1a9)](hourHand);var minuteHand=document[_0xcd4d77(0x1b5)](_0xcd4d77(0x1b0));minuteHand['className']=_0xcd4d77(0x192),minuteHand[_0xcd4d77(0x199)][_0xcd4d77(0x197)]=baseNumbers[i%0x8]+0x1+Math[_0xcd4d77(0x1b8)](i/0x8)*0xa,clock['appendChild'](minuteHand),clocksContainer['appendChild'](clock);}var animationButton=document[_0xcd4d77(0x1a3)](_0xcd4d77(0x19c)),animationInput=document['getElementById'](_0xcd4d77(0x190)),currentAngles={};animationButton[_0xcd4d77(0x1b1)](_0xcd4d77(0x1ad),function(){var _0x35a148=_0xcd4d77,_0x391326=animationInput[_0x35a148(0x19a)],_0x138ca3=_0x391326[_0x35a148(0x1a4)](_0x35a148(0x1a0))[_0x35a148(0x1b7)](Boolean);_0x138ca3[_0x35a148(0x196)](function(_0x2d09b9,_0xe2c70b){setTimeout(function(){var _0x1500c3=_0x3baa,_0x1958df=_0x2d09b9[_0x1500c3(0x1a4)](','),_0x422a2f=_0x1958df[_0x1500c3(0x19e)](_0x1500c3(0x1b4)),_0x400776=parseInt(_0x1958df[_0x422a2f+0x1]),_0x4fa031=(_0x400776-0x1)/0x10*0x168;for(var _0x480b61=0x1;_0x480b61<_0x422a2f;_0x480b61++){var _0x3e92fb=parseInt(_0x1958df[_0x480b61]),_0x8b3f21=document[_0x1500c3(0x1a8)](_0x1500c3(0x1ae)+_0x3e92fb+'\x22]');if(_0x8b3f21){var _0x476067=currentAngles[_0x3e92fb]||0x0,_0x29e4b0=_0x4fa031-_0x476067;if(_0x29e4b0<0x0)_0x29e4b0+=0x168;var _0x460408=_0x476067+_0x29e4b0;_0x8b3f21[_0x1500c3(0x1aa)][_0x1500c3(0x1a2)]=_0x1500c3(0x1ab)+_0x460408+'deg)',currentAngles[_0x3e92fb]=_0x460408;}}},_0xe2c70b*0x3e8);});});
+          
+    </script>
+
+</body>
+</html>
