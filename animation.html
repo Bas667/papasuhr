@@ -1,82 +1,158 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>Uhr Simulation</title>
     <style>
-        #clocks {
-            display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-gap: 1px;
-    justify-items: center;
-    align-items: center;
-    width: 35%;
-    margin: auto;
-        }
-        .clock {
-            position: relative;
+        .container {
+    display: grid;
+    grid-template-columns: repeat(8, 100px); /* Creates 8 columns, adjust the size as needed */
+    grid-template-rows: repeat(3, 100px); /* Creates 2 rows, adjust the size as needed */
+    gap: 5px; /* Adjust the spacing between circles as needed */
+    justify-content: center; /* Center the grid horizontally */
+    align-items: center; /* Center the grid vertically */
+}
+        .circle {
             width: 100px;
             height: 100px;
-            border: 3px solid black;
             border-radius: 50%;
-            margin: 4px;
+            border: 2px solid black;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .hand {
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            width: 5px;
-            background: black;
-            transform-origin: bottom;
-            transition: transform 1s linear;
-        }
-        .hour-hand {
-            height: 50%;
-            transform: translateX(-50%) rotate(0deg);
-        }
-        .minute-hand {
-            height: 35%;
-            transform: translateX(-50%) rotate(180deg);
-        }
-        .dot {
+        .pointer {
             position: absolute;
             width: 4px;
-            height: 4px;
-            background: red;
-            border-radius: 50%;
+            height: 50px;
+            background-color: black;
+            transform-origin: 50% 100%;
+            bottom: 50%;
+            left: 49%;
         }
-        .center {
-    text-align: center;
-}
-        #coordinates, #activeHands {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            white-space: pre; /* Add this line */
-        }
-        #activeHands {
-            bottom: 100px;
-        }
-        #animateButton {
+        .pointer1, .pointer3, .pointer5, .pointer7, .pointer9, .pointer11, .pointer13, .pointer15, 
+        .pointer17, .pointer19, .pointer21, .pointer23, .pointer25, .pointer27, .pointer29, .pointer31 
+        .pointer33, .pointer35, .pointer37, .pointer39, .pointer41, .pointer43, .pointer45, .pointer47 { background-color: black; }
+
+        .pointer2, .pointer4, .pointer6, .pointer8, .pointer10, .pointer12, .pointer14, .pointer16, 
+        .pointer18, .pointer20, .pointer22, .pointer24, .pointer26, .pointer28, .pointer30, .pointer32, 
+        .pointer34, .pointer36, .pointer38, .pointer40, .pointer42, .pointer44, .pointer46, .pointer48 { background-color: red; }
+        input, button {
             display: block;
-            width: 200px;
             margin: 20px auto;
+            width: 200px;
         }
     </style>
 </head>
 <body>
-    <h1 align="center">Dem Papa seine Uhr</h1>
-    <h2 align="center">ANIMATION</h2>
-    <div id="clocks"></div>
-
-    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;margin: 20px auto">
-        <input type="text" id="animationInput" placeholder="Animationsdaten hier rein" style="width: 700px; height: 40px; font-size: 20px;">
-        <button id="animateButton" style="width: 200px; height: 50px; font-size: 20px;">STARTE ANIMATION</button>
+    <h1 align="center">Simulation (Stand 13.03.24)</h1>
+<div class="container">
+    <div class="circle">
+        <div class="pointer pointer1" id="pointer11"></div>
+        <div class="pointer pointer2" id="pointer12"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer3" id="pointer13"></div>
+        <div class="pointer pointer4" id="pointer14"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer5" id="pointer41"></div>
+        <div class="pointer pointer6" id="pointer42"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer7" id="pointer43"></div>
+        <div class="pointer pointer8" id="pointer44"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer9" id="pointer71"></div>
+        <div class="pointer pointer10" id="pointer72"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer11" id="pointer73"></div>
+        <div class="pointer pointer12" id="pointer74"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer13" id="pointer101"></div>
+        <div class="pointer pointer14" id="pointer102"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer15" id="pointer103"></div>
+        <div class="pointer pointer16" id="pointer104"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer17" id="pointer21"></div>
+        <div class="pointer pointer18" id="pointer22"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer19" id="pointer23"></div>
+        <div class="pointer pointer20" id="pointer24"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer21" id="pointer51"></div>
+        <div class="pointer pointer22" id="pointer52"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer23" id="pointer53"></div>
+        <div class="pointer pointer24" id="pointer54"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer25" id="pointer81"></div>
+        <div class="pointer pointer26" id="pointer82"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer27" id="pointer83"></div>
+        <div class="pointer pointer28" id="pointer84"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer29" id="pointer111"></div>
+        <div class="pointer pointer30" id="pointer112"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer31" id="pointer113"></div>
+        <div class="pointer pointer32" id="pointer114"></div>
     </div>
 
-    <script>
-function _0x43b6(){var _0x26dd80=['value','createElement','255','2785920IbAkDF','querySelector','deg)','.hand[data-number=\x22','number','clocks','getElementById','style','6170CILCIx','hand\x20minute-hand','1827072lNEcjz','88VVwrEB','119976RUqpJJ','dataset','animateButton','addEventListener','translateX(-50%)\x20rotate(','clock','230','coordinates','split','click','487326TSfYfY','indexOf','className','floor','7912720vIQwgl','316977XThccU','hand\x20hour-hand','div','animationInput','forEach','filter','appendChild'];_0x43b6=function(){return _0x26dd80;};return _0x43b6();}var _0x47c230=_0x5f56;(function(_0x22cd9f,_0x1d776e){var _0x2e7ca3=_0x5f56,_0x34a669=_0x22cd9f();while(!![]){try{var _0x3abae7=parseInt(_0x2e7ca3(0x1db))/0x1*(-parseInt(_0x2e7ca3(0x1de))/0x2)+-parseInt(_0x2e7ca3(0x1ee))/0x3+parseInt(_0x2e7ca3(0x1df))/0x4+-parseInt(_0x2e7ca3(0x1f8))/0x5+parseInt(_0x2e7ca3(0x1dd))/0x6+-parseInt(_0x2e7ca3(0x1e9))/0x7+parseInt(_0x2e7ca3(0x1ed))/0x8;if(_0x3abae7===_0x1d776e)break;else _0x34a669['push'](_0x34a669['shift']());}catch(_0x173126){_0x34a669['push'](_0x34a669['shift']());}}}(_0x43b6,0x4e0a7));var clocksContainer=document[_0x47c230(0x1d9)](_0x47c230(0x1d8)),coordinates=document['getElementById'](_0x47c230(0x1e6)),activeHandsBox=document[_0x47c230(0x1d9)]('activeHands'),activeAngle=0x0,activeHands=[],baseNumbers=[0xb,0xd,0x29,0x2b,0x47,0x49,0x65,0x67];function _0x5f56(_0x39e105,_0x2ed03c){var _0x43b697=_0x43b6();return _0x5f56=function(_0x5f56d0,_0x27e216){_0x5f56d0=_0x5f56d0-0x1d8;var _0x316756=_0x43b697[_0x5f56d0];return _0x316756;},_0x5f56(_0x39e105,_0x2ed03c);}for(var i=0x0;i<0x18;i++){var clock=document[_0x47c230(0x1f6)]('div');clock['className']=_0x47c230(0x1e4);var hourHand=document[_0x47c230(0x1f6)](_0x47c230(0x1f0));hourHand[_0x47c230(0x1eb)]=_0x47c230(0x1ef),hourHand[_0x47c230(0x1e0)]['number']=baseNumbers[i%0x8]+Math[_0x47c230(0x1ec)](i/0x8)*0xa,clock[_0x47c230(0x1f4)](hourHand);var minuteHand=document[_0x47c230(0x1f6)](_0x47c230(0x1f0));minuteHand[_0x47c230(0x1eb)]=_0x47c230(0x1dc),minuteHand[_0x47c230(0x1e0)][_0x47c230(0x1fc)]=baseNumbers[i%0x8]+0x1+Math[_0x47c230(0x1ec)](i/0x8)*0xa,clock['appendChild'](minuteHand),clocksContainer[_0x47c230(0x1f4)](clock);}var animationButton=document[_0x47c230(0x1d9)](_0x47c230(0x1e1)),animationInput=document[_0x47c230(0x1d9)](_0x47c230(0x1f1)),currentAngles={};animationButton[_0x47c230(0x1e2)](_0x47c230(0x1e8),function(){var _0x37ff31=_0x47c230,_0x49f039=animationInput[_0x37ff31(0x1f5)],_0x1fbd10=_0x49f039[_0x37ff31(0x1e7)](_0x37ff31(0x1f7))[_0x37ff31(0x1f3)](Boolean),_0x3bdf0f=0x0;_0x1fbd10[_0x37ff31(0x1f2)](function(_0x16faee,_0x47ef53){var _0x16320a=_0x37ff31,_0x1779ed=_0x16faee[_0x16320a(0x1e7)](','),_0x1e0288=_0x1779ed[_0x16320a(0x1ea)](_0x16320a(0x1e5)),_0x24f67f=parseInt(_0x1779ed[_0x1e0288+0x1]),_0x1e00a2=parseInt(_0x1779ed[_0x1e0288+0x2]);_0x24f67f<0x29&&(_0x1e00a2=_0x24f67f,_0x24f67f=0x28);var _0x173ce8=_0x24f67f-0x28,_0x7ebbc2=_0x1e00a2/0x10*0x168;_0x3bdf0f+=_0x173ce8,setTimeout(function(){var _0x491964=_0x16320a;for(var _0x38db4b=0x1;_0x38db4b<_0x1e0288;_0x38db4b++){var _0x4dda38=parseInt(_0x1779ed[_0x38db4b]),_0x51fa43=document[_0x491964(0x1f9)](_0x491964(0x1fb)+_0x4dda38+'\x22]');if(_0x51fa43){var _0xf834f3=currentAngles[_0x4dda38]||0x0,_0x21019f=_0x7ebbc2-_0xf834f3;if(_0x21019f<0x0)_0x21019f+=0x168;var _0x254b74=_0xf834f3+_0x21019f;_0x51fa43[_0x491964(0x1da)]['transform']=_0x491964(0x1e3)+_0x254b74+_0x491964(0x1fa),currentAngles[_0x4dda38]=_0x254b74;}}},_0x3bdf0f*0x3e8),_0x3bdf0f+=0x1;});});          
-    </script>
+    <div class="circle">
+        <div class="pointer pointer33" id="pointer31"></div>
+        <div class="pointer pointer34" id="pointer32"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer35" id="pointer33"></div>
+        <div class="pointer pointer36" id="pointer34"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer37" id="pointer61"></div>
+        <div class="pointer pointer38" id="pointer62"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer39" id="pointer63"></div>
+        <div class="pointer pointer40" id="pointer64"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointe41" id="pointer91"></div>
+        <div class="pointer pointer42" id="pointer92"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer43" id="pointer93"></div>
+        <div class="pointer pointer44" id="pointer94"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer45" id="pointer121"></div>
+        <div class="pointer pointer46" id="pointer122"></div>
+    </div>
+    <div class="circle">
+        <div class="pointer pointer47" id="pointer123"></div>
+        <div class="pointer pointer48" id="pointer124"></div>
+    </div>
+</div>
+
+<input type="text" id="sequence" style="width:800px;" placeholder="Code eingeben">
+<button onclick="startRotation()">Simulieren</button>
+<button onclick="location.reload()">RESET</button>
+
+<script>
+function _0x2c41(_0x4a0ba3,_0x40cef0){const _0x2c4ef6=_0x2c4e();return _0x2c41=function(_0x2c4182,_0x5d3c44){_0x2c4182=_0x2c4182-0xb5;let _0x5e3770=_0x2c4ef6[_0x2c4182];return _0x5e3770;},_0x2c41(_0x4a0ba3,_0x40cef0);}(function(_0x377c01,_0x2f72d7){const _0x4b08bf=_0x2c41,_0x4d7999=_0x377c01();while(!![]){try{const _0x5eca71=-parseInt(_0x4b08bf(0xbb))/0x1+-parseInt(_0x4b08bf(0xbd))/0x2*(-parseInt(_0x4b08bf(0xcc))/0x3)+-parseInt(_0x4b08bf(0xb6))/0x4*(-parseInt(_0x4b08bf(0xcd))/0x5)+-parseInt(_0x4b08bf(0xc5))/0x6*(-parseInt(_0x4b08bf(0xba))/0x7)+-parseInt(_0x4b08bf(0xc9))/0x8*(parseInt(_0x4b08bf(0xce))/0x9)+-parseInt(_0x4b08bf(0xb7))/0xa*(parseInt(_0x4b08bf(0xcf))/0xb)+parseInt(_0x4b08bf(0xbc))/0xc*(-parseInt(_0x4b08bf(0xcb))/0xd);if(_0x5eca71===_0x2f72d7)break;else _0x4d7999['push'](_0x4d7999['shift']());}catch(_0x41aac9){_0x4d7999['push'](_0x4d7999['shift']());}}}(_0x2c4e,0x9a3e4));let currentAngles={'pointer11':0x0,'pointer12':0x0,'pointer13':0x0,'pointer14':0x0,'pointer41':0x0,'pointer42':0x0,'pointer43':0x0,'pointer44':0x0,'pointer71':0x0,'pointer72':0x0,'pointer73':0x0,'pointer74':0x0,'pointer101':0x0,'pointer102':0x0,'pointer103':0x0,'pointer104':0x0,'pointer21':0x0,'pointer22':0x0,'pointer23':0x0,'pointer24':0x0,'pointer51':0x0,'pointer52':0x0,'pointer53':0x0,'pointer54':0x0,'pointer81':0x0,'pointer82':0x0,'pointer83':0x0,'pointer84':0x0,'pointer111':0x0,'pointer112':0x0,'pointer113':0x0,'pointer114':0x0,'pointer31':0x0,'pointer32':0x0,'pointer33':0x0,'pointer34':0x0,'pointer61':0x0,'pointer62':0x0,'pointer63':0x0,'pointer64':0x0,'pointer91':0x0,'pointer92':0x0,'pointer93':0x0,'pointer94':0x0,'pointer121':0x0,'pointer122':0x0,'pointer123':0x0,'pointer124':0x0};const speed=0x46,startIndicator=0xd2,endIndicator=0xfa,actionIndicator=0xe6;function calculateDuration(_0x13b5e1){const _0xacd0a7=_0x2c41;return Math[_0xacd0a7(0xb8)](_0x13b5e1)/speed*0x3e8;}async function rotatePointer(_0x4d50c0,_0x86ac8c){return new Promise(_0x184f22=>{const _0x1a7367=_0x2c41,_0x6ba76c=document['getElementById'](_0x4d50c0);let _0x37e832=currentAngles[_0x4d50c0]%0x168,_0x5994b5;_0x86ac8c<0x0?(_0x86ac8c=0x168+_0x86ac8c,_0x5994b5=_0x86ac8c-_0x37e832,_0x5994b5>0x0&&(_0x5994b5-=0x168)):(_0x5994b5=_0x86ac8c-_0x37e832,_0x5994b5<0x0&&(_0x5994b5+=0x168));let _0x5714df=calculateDuration(Math[_0x1a7367(0xb8)](_0x5994b5));currentAngles[_0x4d50c0]=_0x37e832+_0x5994b5,_0x6ba76c[_0x1a7367(0xc8)][_0x1a7367(0xc7)]=_0x1a7367(0xc2)+_0x5714df+_0x1a7367(0xc0),_0x6ba76c['style'][_0x1a7367(0xc3)]=_0x1a7367(0xb9)+(_0x37e832+_0x5994b5)%0x168+_0x1a7367(0xbf),setTimeout(_0x184f22,_0x5714df);});}async function processSequence(_0x11ce0f){const _0x1a11f6=_0x2c41;let _0x5443bb=[],_0x3d575e=0x0,_0x5909d3=0x0,_0x57450c=0x0;for(let _0x472631=0x1;_0x472631<_0x11ce0f[_0x1a11f6(0xc6)]-0x1;_0x472631++){if(parseInt(_0x11ce0f[_0x472631])===actionIndicator){let _0x3c0c69=parseInt(_0x11ce0f[++_0x472631],0xa),_0x39da0f=Math[_0x1a11f6(0xb8)](_0x3c0c69)>0x28;_0x39da0f?(_0x57450c=(Math[_0x1a11f6(0xb8)](_0x3c0c69)-0x28)*0x3e8,_0x3d575e=parseInt(_0x11ce0f[++_0x472631],0xa)):_0x3d575e=_0x3c0c69;_0x3d575e<0x14?(_0x5909d3=_0x3d575e*22.5,_0x5909d3=-0x1*(0x168-_0x3d575e*22.5)):_0x5909d3=(_0x3d575e-0x15)*22.5;if(_0x57450c>0x0)await new Promise(_0x19b072=>setTimeout(_0x19b072,_0x57450c));let _0xebe275=_0x5443bb[_0x1a11f6(0xbe)](_0x55df8b=>rotatePointer('pointer'+_0x55df8b,_0x5909d3));await Promise[_0x1a11f6(0xd0)](_0xebe275),_0x5443bb=[],_0x57450c=0x0;}else _0x5443bb['push'](_0x11ce0f[_0x472631]);}}async function startRotation(){const _0x512b7b=_0x2c41,_0x50e9c8=document['getElementById'](_0x512b7b(0xc4))[_0x512b7b(0xc1)]['split'](',');let _0xb539e4=[],_0x9ba918=-0x1;_0x50e9c8['forEach']((_0x43b8f2,_0x2faea3)=>{const _0x36add4=_0x512b7b;if(parseInt(_0x43b8f2)===startIndicator)_0x9ba918=_0x2faea3;parseInt(_0x43b8f2)===endIndicator&&_0x9ba918!==-0x1&&(_0xb539e4[_0x36add4(0xb5)](_0x50e9c8[_0x36add4(0xca)](_0x9ba918,_0x2faea3+0x1)),_0x9ba918=-0x1);});for(let _0x3add5d of _0xb539e4){await processSequence(_0x3add5d);}}function _0x2c4e(){const _0x54e0f5=['145wxCQKj','99dCPTGq','700975LSvzPI','all','push','106412tWRCEo','10toJcdz','abs','rotate(','7xhlnXZ','999046pfsRdM','4645092hmPoxR','232754ZKpQmY','map','deg)','ms\x20linear','value','transform\x20','transform','sequence','3163638WeZLCK','length','transition','style','23096SlZBup','slice','13faAicp','21kOBpVl'];_0x2c4e=function(){return _0x54e0f5;};return _0x2c4e();}
+</script>
 
 </body>
 </html>
